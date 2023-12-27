@@ -1,0 +1,126 @@
+.main {
+    background-color: #333;
+    position: fixed;
+    right: 0;
+    left: 0;
+}
+.navBtn{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.navBtn>img{
+    width: 3rem;
+}
+.main .header {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 12px 35px;
+    border-radius: 5px;
+}
+
+/* Your regular header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px;
+}
+
+
+.logo>img {
+    width: 50%;
+}
+.imgBtn,.sideBarImg{
+    filter: invert(1);
+}
+/* Navigation menu styles */
+.navMenu {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navMenu li {
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.navMenu a {
+    text-decoration: none;
+    color: white;
+}
+
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    /* background-color: #333; */
+    background: white;
+    padding-top: 20px;
+    color: black;
+    transition: transform 0.6s ease-in-out;
+  }
+  
+/* Mobile menu styles */
+.mobileMenuBtn {
+    display: none;
+}
+.translate{
+   
+        transform: translateX(0);
+      
+      
+}
+/* media query for mobile and tablet styles Only */
+@media screen and (max-width: 1024px) {
+    .navMenu {
+        display: none;
+        flex-direction: column;
+        text-align: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .navMenu.open {
+        display: flex;
+    }
+
+    .navMenu li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+}
+
+/* for Desktop styles only */
+@media screen and (min-width: 1025px) {
+    .navMenu {
+        display: flex;
+    }
+
+    .mobileMenuBtn {
+        display: none;
+    }
+}
+
+/* Media query for mobile styles */
