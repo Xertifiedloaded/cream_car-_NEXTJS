@@ -16,7 +16,7 @@ export default function Sidebar({ toggleSideBar, SideBar }) {
               Nav.map((content, index) => (
                 <div className={styles.sideContent}>
                   <Image src={content.icon} alt="logo" />
-                  <li>
+                  <li key={index}>
                     {content.content}
                   </li>
                 </div>

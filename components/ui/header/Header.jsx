@@ -42,7 +42,9 @@ export default function Header() {
         <header className={classes.main}>
           <div className={classes.header}>
             <div className={classes.logo}>
-              <Image src={logo} />
+            <Link href="/">
+            <Image width={80} src={logo} />
+            </Link>
             </div>
             <nav
               className={` ${isMobileMenuOpen ? classes.open : null} && ${
