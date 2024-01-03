@@ -5,10 +5,9 @@ import logo from "../../../assets/images/logo.webp";
 import { useState, useEffect } from "react";
 import open from "../../../assets/images/icon-menu.svg";
 import close from "../../../assets/images/icon-close-menu.svg";
-
 import Link from "next/link";
-// import Sidebar from "@components/sideBar/SideBar";
 import { NavContent } from "@/utils/Nav";
+import Sidebar from "@/components/sideBar/SideBar";
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBar, setSideBar] = useState(false);
@@ -72,7 +71,7 @@ export default function Header() {
                 </div>
               )}
             </nav>
-            {/* {sideBar && isDesktop && (
+            {sideBar && isDesktop && (
               <div
                 className={`${sideBar ? classes.translate : ""} && ${
                   classes.sidebar
@@ -80,7 +79,7 @@ export default function Header() {
               >
                 <Sidebar toggleSideBar={toggleSideBar} SideBar={sideBar} />
               </div>
-            )} */}
+            )}
             <div className={classes.mobileMenuBtn} onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? (
                 <Image className={classes.imgBtn} src={close} alt="null" />

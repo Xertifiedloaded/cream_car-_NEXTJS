@@ -1,7 +1,8 @@
-import { Nav } from "@utils/Nav";
-import close from "../../public/images/icon-close-menu.svg"
+
+import close from "../../assets/images/icon-close-menu.svg"
 import Image from "next/image";
 import styles from './sidebar.module.css'
+import { Nav } from "@/utils/Nav";
 export default function Sidebar({ toggleSideBar, SideBar }) {
 
   return (
