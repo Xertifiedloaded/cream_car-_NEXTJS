@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import styles from "./signup.module.css";
 import Link from "next/link";
-import { useUserContext } from "@context/Context";
+
 export default function Login() {
-  const {name,setName}=useUserContext()
+  // const {name,setName}=useUserContext()
   const [isFocused, setFocused] = useState(false);
   const [focus, setFocus] = useState(false);
   const [error, setError] = useState("");

@@ -1,11 +1,11 @@
 "use client"
 import classes from './hero.module.css'
-import image1 from "../../public/images/pic1.jpeg";
-import image2 from "../../public/images/pic2.jpeg";
-import image3 from "../../public/images/pic3.jpg";
-import image4 from "../../public/images/pic5.jpeg";
-import image5 from "../../public/images/pic9.jpg";
-import image6 from "../../public/images/pic8.jpg";
+import image1 from "../../assets/images/pic1.jpeg";
+import image2 from "../../assets/images/pic2.jpeg";
+import image3 from "../../assets/images/pic3.jpg";
+import image4 from "../../assets/images/pic5.jpeg";
+import image5 from "../../assets/images/pic9.jpg";
+import image6 from "../../assets/images/pic8.jpg";
 import { useState, useEffect } from "react";
 
 export default function Hero() {

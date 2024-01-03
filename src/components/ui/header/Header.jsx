@@ -1,13 +1,14 @@
 "use client";
 import classes from "./header.module.css";
 import Image from "next/image";
-import logo from "../../../public/images/logo.webp";
+import logo from "../../../assets/images/logo.webp";
 import { useState, useEffect } from "react";
-import open from "../../../public/images/icon-menu.svg";
-import close from "../../../public/images/icon-close-menu.svg";
-import { NavContent } from "@utils/Nav";
+import open from "../../../assets/images/icon-menu.svg";
+import close from "../../../assets/images/icon-close-menu.svg";
+
 import Link from "next/link";
-import Sidebar from "@components/sideBar/SideBar";
+// import Sidebar from "@components/sideBar/SideBar";
+import { NavContent } from "@/utils/Nav";
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBar, setSideBar] = useState(false);
@@ -32,7 +33,7 @@ export default function Header() {
         window.removeEventListener("resize", handleResize);
       };
     }
-  }, []);
+  }, [windowWidth]);
   const isMobile = windowWidth <= 768;
   const isTablet = windowWidth > 768 && windowWidth <= 1024;
   const isDesktop = windowWidth > 1024;
@@ -71,7 +72,7 @@ export default function Header() {
                 </div>
               )}
             </nav>
-            {sideBar && isDesktop && (
+            {/* {sideBar && isDesktop && (
               <div
                 className={`${sideBar ? classes.translate : ""} && ${
                   classes.sidebar
@@ -79,7 +80,7 @@ export default function Header() {
               >
                 <Sidebar toggleSideBar={toggleSideBar} SideBar={sideBar} />
               </div>
-            )}
+            )} */}
             <div className={classes.mobileMenuBtn} onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? (
                 <Image className={classes.imgBtn} src={close} alt="null" />

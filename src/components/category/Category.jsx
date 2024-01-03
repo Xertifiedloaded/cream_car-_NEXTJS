@@ -1,5 +1,6 @@
+import { categories } from "@/utils/Nav";
 import styles from "./category.module.css";
-import { categories } from "@utils/Nav";
+
 
 export default function Category() {
   return (

@@ -1,5 +1,6 @@
 "use client"
-import { FooterItems } from "@utils/Nav";
+
+import { FooterItems } from "@/utils/Nav";
 import styles from "./footer.module.css"
 import React from "react";
 

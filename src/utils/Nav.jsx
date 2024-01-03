@@ -1,12 +1,10 @@
-import Login from "../public/images/arrow-right-to-bracket-solid.svg";
-import Request from "../public/images/code-pull-request-solid.svg";
-import Faq from "../public/images/address-card-regular.svg";
-import Logout from "../public/images/loginpic.jpeg";
-import image1 from "../public/images/pic1.jpeg";
-import image2 from "../public/images/pic8.jpg";
-import image3 from "../public/images/pic3.jpg";
-import image4 from "../public/images/pic6.jpeg";
-
+import Login from "../assets/images/arrow-right-to-bracket-solid.svg";
+import Request from "../assets/images/code-pull-request-solid.svg";
+import Faq from "../assets/images/address-card-regular.svg";
+import image1 from "../assets/images/pic1.jpeg";
+import image2 from "../assets/images/pic8.jpg";
+import image3 from "../assets/images/pic3.jpg";
+import image4 from "../assets/images/pic6.jpeg";
 
 export const FooterItems = [
   {
@@ -25,7 +23,6 @@ export const FooterItems = [
     headline: "Business",
     About: "Affliate marketing",
     contact: "List with us",
-
   },
   {
     headline: "Social media",
@@ -89,7 +86,6 @@ export const Nav = [
     path: "/contact_us",
     icon: Faq,
   },
-
 ];
 
 export const categories = [
