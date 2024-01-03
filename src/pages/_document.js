@@ -1,11 +1,14 @@
+import ContextApi from "@/context/ContextApi";
 import { Head, Html, NextScript, Main } from "next/document";
-export default function Document() {
+export default function RootLayout() {
     return (
         <Html lang="en">
             <Head />
             <body>
-                <Main />
-                <NextScript />
+                <ContextApi>
+                    <Main />
+                    <NextScript />
+                </ContextApi>
             </body>
         </Html>
     )
