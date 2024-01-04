@@ -40,11 +40,11 @@ export const NavContent = [
   },
   {
     content: "Real Estate",
-    path: "/real_estate",
+    path: "/real-estate",
   },
   {
     content: "Auto mobile",
-    path: "/auto_mobile",
+    path: "/auto-mobile",
   },
   {
     content: "About",
@@ -52,7 +52,7 @@ export const NavContent = [
   },
   {
     content: "contact us",
-    path: "/contact_us",
+    path: "/contact-us",
   },
   {
     content: "Request",

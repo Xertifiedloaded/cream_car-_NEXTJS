@@ -9,22 +9,33 @@
     font-size: 16px;
     margin: 10px 0;
 }
+
 .card {
     z-index: -1;
     position: relative;
     overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-color: rgba(0, 0, 0, 0.4);
     width: 300px;
     height: 300px;
+    background-color: rgba(0, 0, 0, 0.4);
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 16px;
+    animation: shimmer 1.5s infinite;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+@keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+  
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @media (max-width:768px){
+    .SkeletalLoading{
+      width: 100%;
+    }
+  }
 .container {
     display: flex;
     gap: 20px;
@@ -75,7 +86,6 @@
     }
 }
 
-/* for Desktop styles only */
 @media screen and (min-width:1025px) {
     .container {
         display: grid;

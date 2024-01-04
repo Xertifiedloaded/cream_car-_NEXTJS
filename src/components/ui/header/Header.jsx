@@ -8,11 +8,16 @@ import close from "../../../assets/images/icon-close-menu.svg";
 import Link from "next/link";
 import { NavContent } from "@/utils/Nav";
 import Sidebar from "@/components/sideBar/SideBar";
+import { Button, HeaderButton } from "@/utils/Button";
+import Hamburger from "@/utils/Hamburger";
+import Icon from "@/utils/Hamburger";
 export default function Header() {
+  const [visible,setVisble]=useState(true)
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBar, setSideBar] = useState(false);
   const toggleSideBar = () => {
     setSideBar(!sideBar);
+    e.stopPropagation();
     console.log(sideBar);
   };
   const toggleMobileMenu = () => {
@@ -39,11 +44,11 @@ export default function Header() {
   return (
     <>
       {(isMobile || isTablet || isDesktop) && (
-        <header className={classes.main}>
+        <header  className={classes.main}>
           <div className={classes.header}>
             <div className={classes.logo}>
             <Link href="/">
-            <Image width={80} src={logo} />
+            <Image alt="logo" width={80} src={logo} />
             </Link>
             </div>
             <nav
@@ -53,21 +58,19 @@ export default function Header() {
             >
               <ul>
                 {NavContent.map((nav, index) => (
-                  <li key={index}>{nav.content}</li>
+                  <li onClick={toggleMobileMenu} key={index}>
+                    <Link href={nav.path}>
+                    {nav.content}
+                    </Link>
+                  </li>
                 ))}
               </ul>
               {isDesktop && (
                 <div className={classes.navBtn}>
                   <Link href="/login">
-                    <button className={classes.btn}>Login</button>
+                    <button style={HeaderButton} className={classes.btn}>Login</button>
                   </Link>
-
-                  <Image
-                    onClick={toggleSideBar}
-                    className={classes.sideBarImg}
-                    src={open}
-                    alt="null"
-                  />
+                  <Icon onClick={toggleSideBar}/>
                 </div>
               )}
             </nav>

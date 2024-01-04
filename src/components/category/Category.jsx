@@ -1,8 +1,11 @@
 import { categories } from "@/utils/Nav";
 import styles from "./category.module.css";
-
-
+import { useUserContext } from "@/context/ContextApi";
+import SkeletonLoader from "../lazy-load/Loader";
+import Image from "next/image";
+import { Card } from "@/utils/Button";
 export default function Category() {
+  const { loading } = useUserContext();
   return (
     <>
       <section className={styles.main}>
@@ -10,7 +13,7 @@ export default function Category() {
           <h1>Category</h1>
           <div className={styles.container}>
             {categories.map((category, index) => (
-              <CarCategory key={index} {...category} />
+              <CarCategory key={index} loading={loading} {...category} />
             ))}
           </div>
         </div>
@@ -18,16 +21,22 @@ export default function Category() {
     </>
   );
 }
-const CarCategory = ({ key, image, content, coming }) => {
+const CarCategory = ({ key, image, content, loading, coming }) => {
   return (
-    <div
-      style={{ backgroundImage: `url(${image.src})` }}
-      className={styles.card}
-    >
-      <div className={styles.content} key={key}>
-        <h2>{content}</h2>
-        <p>{coming}</p>
-      </div>
-    </div>
+    <>
+      <div
+          key={key}
+          className={styles.card}
+        >
+          <Image  
+          layout="fill"
+          alt="category img"
+          objectFit="cover" src={image} />
+          <div className={styles.content}>
+            <h2>{content}</h2>
+            <p>{coming}</p>
+          </div>
+        </div>
+    </>
   );
 };
