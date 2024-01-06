@@ -8,45 +8,41 @@ import image5 from "../../assets/images/pic9.jpg";
 import image6 from "../../assets/images/pic8.jpg";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Button } from "@/utils/Button";
+import { useRouter } from "next/router";
+import HomeHero from "./home-hero/HomeHero";
+import EstateHero from "./estate-hero/EstateHero";
+import AutoMobileHero from "./auto-hero/AutoMobile";
+import { UserUseData } from "@/context/DataContext";
 export default function Hero() {
-  const images = [image6, image1, image2, image3, image4, image5, image6];
-  const [current, setCurrent] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prevImage) => (prevImage + 1) % images.length);
-    }, 7000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [images.length]);
-  const transitionStyles = {
-    transition: "0.4s ease-in",
-  };
+  const location = useRouter();
+  const { pathname } = location;
+  const { current, heroImage } = UserUseData();
+  let componentToShow;
+  switch (pathname) {
+    case "/":
+      componentToShow = <HomeHero />;
+      break;
+    case "/real-estate":
+      componentToShow = <EstateHero />;
+      break;
+    case "/auto-mobile":
+      componentToShow = <AutoMobileHero />;
+      break;
+    default:
+      componentToShow = "Not found";
+  }
+
   return (
     <>
       <div className={classes.heroContainer}>
         <Image
           className={classes.heroImage}
-          src={images[current]}
+          src={heroImage[current]}
           alt="Hero Image"
           layout="fill"
           objectFit="cover"
         />
-        <div className={classes.heroContent}>
-          <div className={classes.content}>
-            <div className={classes.heroContentNew}>
-              <h1>CREAM</h1>
-              <div className={classes.span}></div>
-            </div>
-            <p>The intelligent Market space</p>
-            <div className={classes.btn}>
-              <button style={Button}>Explore</button>
-              <button>Download App</button>
-            </div>
-          </div>
-        </div>
-     
+        <div className={classes.heroContent}>{componentToShow}</div>
       </div>
     </>
   );

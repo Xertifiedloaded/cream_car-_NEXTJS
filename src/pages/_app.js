@@ -4,6 +4,7 @@ import Header from '@/components/ui/header/Header';
 import Footer from '@/components/ui/footer/Footer';
 import { useRouter } from 'next/router';
 import ContextApi from '@/context/ContextApi';
+import DataContext from '@/context/DataContext';
 
 export default function App({ Component, pageProps }) {
     const router = useRouter()
@@ -15,15 +16,17 @@ export default function App({ Component, pageProps }) {
 
     return (
         <>
-            <ContextApi>
-                {HomePage ? <Header /> : null}
-                <Layout>
-                    <div>
-                        <Component {...pageProps} />
-                    </div>
-                </Layout>
-                {HomePage ? <Footer /> : null}
-            </ContextApi>
+            <DataContext>
+                <ContextApi>
+                    {HomePage ? <Header /> : null}
+                    <Layout>
+                        <div>
+                            <Component {...pageProps} />
+                        </div>
+                    </Layout>
+                    {HomePage ? <Footer /> : null}
+                </ContextApi>
+            </DataContext>
         </>
     )
 }
