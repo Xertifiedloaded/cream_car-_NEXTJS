@@ -6,7 +6,6 @@ export default function HomeHero() {
     <div className={classes.content}>
       <div className={classes.heroContentNew}>
         <h1>CREAM</h1>
-        <div className={classes.span}></div>
       </div>
       <p>The intelligent Market space</p>
       <div className={classes.btn}>

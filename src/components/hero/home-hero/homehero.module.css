@@ -5,7 +5,8 @@
 
  .content .heroContentNew {
     display: flex;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
 }
 
  .content .heroContentNew>.span {

@@ -9,10 +9,46 @@ export default function ContextApi({ children }) {
             setLoading(false);
         }, 5000);
     }, [loading]);
+    // header context//
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [sideBar, setSideBar] = useState(false);
+    const toggleSideBar = () => {
+        setSideBar(!sideBar);
+    };
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!isMobileMenuOpen);
+    };
+    const [windowWidth, setWindowWidth] = useState(null);
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setWindowWidth(window.innerWidth);
+            const handleResize = () => {
+                setWindowWidth(window.innerWidth);
+            };
+
+            window.addEventListener("resize", handleResize);
+            return () => {
+                window.removeEventListener("resize", handleResize);
+            };
+        }
+    }, [windowWidth]);
+    const isMobile = windowWidth <= 768;
+    const isTablet = windowWidth > 768 && windowWidth <= 1024;
+    const isDesktop = windowWidth > 1024;
+    // header context//
     const value = {
         loading,
-        setLoading
+        setLoading,
+        toggleSideBar,
+        toggleMobileMenu,
+        isMobile,
+        isTablet,
+        isDesktop,
+        sideBar,
+        setSideBar,
+        isMobileMenuOpen,
+        setMobileMenuOpen,
     }
     return (
         <>
@@ -28,5 +64,4 @@ export const useUserContext = () => {
         throw new Error("this context is not inside usecontext")
     }
     return context
-
 }
