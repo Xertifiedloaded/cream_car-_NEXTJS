@@ -17,7 +17,6 @@ export default function Header() {
   const [sideBar, setSideBar] = useState(false);
   const toggleSideBar = () => {
     setSideBar(!sideBar);
-    e.stopPropagation();
     console.log(sideBar);
   };
   const toggleMobileMenu = () => {

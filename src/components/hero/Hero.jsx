@@ -9,7 +9,7 @@ import image6 from "../../assets/images/pic8.jpg";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/utils/Button";
-export default function Hero({ children }) {
+export default function Hero() {
   const images = [image6, image1, image2, image3, image4, image5, image6];
   const [current, setCurrent] = useState(0);
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Hero({ children }) {
             </div>
           </div>
         </div>
-        {children}
+     
       </div>
     </>
   );
