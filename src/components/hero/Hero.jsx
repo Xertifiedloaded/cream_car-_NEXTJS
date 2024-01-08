@@ -22,7 +22,7 @@ export default function Hero() {
       componentToShow = <AutoMobileHero />;
       break;
     default:
-      componentToShow = "Not found";
+      componentToShow = "Component Not found";
   }
   return (
     <>
