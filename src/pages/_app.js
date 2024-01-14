@@ -10,26 +10,46 @@ import DataContext from '@/context/DataContext';
 export default function App({ Component, pageProps }) {
     const router = useRouter()
     const isHomePage = router.pathname
-    const HomePage = isHomePage === '/' ||
-        isHomePage === "/real-estate" ||
-        isHomePage === '/auto-mobile'
+
+    const ShowHeader = () => {
+        if (
+            isHomePage === '/' ||
+            isHomePage === '/real-estate' ||
+            isHomePage === '/auto-mobile'
+        ) {
+            return <Header />;
+        } else {
+            return null;
+        }
+    };
+    const ShowFooter = () => {
+        if (
+            isHomePage === '/' ||
+            isHomePage === '/real-estate' ||
+            isHomePage === '/auto-mobile'
+        ) {
+            return <Footer />;
+        } else {
+            return null;
+        }
+    };
     const Layout = Component.Layout || EmptyLayout
     const { pathname } = useRouter()
     useEffect(() => {
         window.scrollTo({ top: 0, behaviour: "smooth" })
     }, [pathname])
-    console.log(pathname)
     return (
         <>
             <DataContext>
                 <ContextApi>
-                    {HomePage ? <Header /> : null}
+
+                    <ShowHeader />
                     <Layout>
                         <div>
                             <Component {...pageProps} />
                         </div>
                     </Layout>
-                    {HomePage ? <Footer /> : null}
+                    <ShowFooter />
                 </ContextApi>
             </DataContext>
         </>
