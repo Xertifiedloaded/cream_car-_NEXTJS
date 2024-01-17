@@ -12,14 +12,15 @@ export default function ContextApi({ children }) {
     // header context//
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [sideBar, setSideBar] = useState(false);
-    const toggleSideBar = () => {
+    const toggleSideBar = (e) => {
+        e.stopPropagation()
         setSideBar(!sideBar);
     };
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
+    
     const [windowWidth, setWindowWidth] = useState(null);
-
     useEffect(() => {
         if (typeof window !== "undefined") {
             setWindowWidth(window.innerWidth);
@@ -49,6 +50,7 @@ export default function ContextApi({ children }) {
         setSideBar,
         isMobileMenuOpen,
         setMobileMenuOpen,
+        sideBar, setSideBar
     }
     return (
         <>

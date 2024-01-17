@@ -1,19 +1,19 @@
-.main {
+.modal {
     box-sizing: border-box;
     padding: 0 15px;
     
 }
-.main .SideBar ul{
+.modal .SideBar ul{
     margin-top: 30px;
 }
-.main .SideBar ul>.sideContent {
+.modal .SideBar ul>.sideContent {
     margin-bottom: 40px;
     display: flex;
     gap: 20px;
     font-size: 1rem;
     text-transform: capitalize;
 }
-.main>.imgContainer{
+.modal>.imgContainer{
     padding: 5px 0;
     border-bottom: 1px solid rgb(182, 174, 174);
 }

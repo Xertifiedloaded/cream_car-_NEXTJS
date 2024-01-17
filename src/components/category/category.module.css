@@ -5,9 +5,17 @@
     margin: 0 auto;
 
 }
-.main h1{
+
+.main h1 {
     font-size: 16px;
     margin: 10px 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%)1fr));
+  gap: 1rem;
+
 }
 
 .card {
@@ -22,20 +30,23 @@
     animation: shimmer 1.5s infinite;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 @keyframes shimmer {
     0% {
-      background-position: -200% 0;
+        background-position: -200% 0;
     }
-  
+
     100% {
-      background-position: 200% 0;
+        background-position: 200% 0;
     }
-  }
-  @media (max-width:768px){
-    .SkeletalLoading{
-      width: 100%;
+}
+
+@media (max-width:768px) {
+    .SkeletalLoading {
+        width: 100%;
     }
-  }
+}
+
 .container {
     display: flex;
     gap: 20px;
@@ -87,11 +98,7 @@
 }
 
 @media screen and (min-width:1025px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
+
 
     .main {
         height: 50vh;

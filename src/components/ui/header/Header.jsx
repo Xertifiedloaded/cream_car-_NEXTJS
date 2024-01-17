@@ -10,6 +10,7 @@ import Sidebar from "@/components/sideBar/SideBar";
 import { HeaderButton } from "@/utils/Button";
 import Icon from "@/utils/Hamburger";
 import { useUserContext } from "@/context/ContextApi";
+import Overlay from "@/components/modal/Modal";
 export default function Header() {
   const {
     toggleSideBar,
@@ -19,6 +20,7 @@ export default function Header() {
     isDesktop,
     sideBar,
     isMobileMenuOpen,
+    setSideBar
   } = useUserContext();
   return (
     <>
@@ -49,17 +51,21 @@ export default function Header() {
                       Login
                     </button>
                   </Link>
-                  <Icon onClick={toggleSideBar} />
+                  <Icon   onClick={() => setSideBar(true)}/>
                 </div>
               )}
             </nav>
             {sideBar && isDesktop && (
               <div
-                className={`${sideBar ? classes.translate : ""} && ${
-                  classes.sidebar
-                }`}
+                // className={`${sideBar ? classes.translate : ""} && ${
+                //   classes.sidebar
+                // }`}
+                // onClick={toggleSideBar}
+                className={`${classes.overlay} ${sideBar ? classes.open : ""}`}
               >
-                <Sidebar toggleSideBar={toggleSideBar} SideBar={sideBar} />
+                {<Overlay sideBar={sideBar} setSideBar={setSideBar} toggleSideBar={toggleSideBar} />}
+
+                {/* <Sidebar toggleSideBar={toggleSideBar} SideBar={sideBar} /> */}
               </div>
             )}
             <div className={classes.mobileMenuBtn} onClick={toggleMobileMenu}>
