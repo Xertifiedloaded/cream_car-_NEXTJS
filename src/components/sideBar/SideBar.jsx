@@ -2,12 +2,12 @@ import close from "../../assets/images/icon-close-menu.svg";
 import Image from "next/image";
 import styles from "./sidebar.module.css";
 import { Nav } from "@/utils/Nav";
-export default function Sidebar({ toggleSideBar, SideBar,setSideBar }) {
+export default function Sidebar({ handleSidebarClick }) {
   return (
     <>
-      <aside       onClick={() => setSideBar(false)} className={`${styles.modal} && ${SideBar ? styles.open : ""}`}>
+      <aside className={`${styles.modal}`}>
         <div className={styles.imgContainer}>
-          <Image src={close} alt="null" onClick={toggleSideBar} />
+          <Image src={close} alt="null" onClick={handleSidebarClick} />
         </div>
         <div className={styles.SideBar}>
           <ul>

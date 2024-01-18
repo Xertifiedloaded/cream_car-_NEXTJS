@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState, useRef } from 'react'
 export const UserContext = createContext()
 export default function ContextApi({ children }) {
     const [loading, setLoading] = useState(true);
@@ -11,15 +11,33 @@ export default function ContextApi({ children }) {
     }, [loading]);
     // header context//
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [sideBar, setSideBar] = useState(false);
-    const toggleSideBar = (e) => {
-        e.stopPropagation()
-        setSideBar(!sideBar);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setIsSidebarOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleOutsideClick);
+
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, []);
+
+    const handleSidebarClick = () => {
+        setIsSidebarOpen(!isSidebarOpen);
     };
+
+
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
-    
+
     const [windowWidth, setWindowWidth] = useState(null);
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -41,16 +59,16 @@ export default function ContextApi({ children }) {
     const value = {
         loading,
         setLoading,
-        toggleSideBar,
         toggleMobileMenu,
         isMobile,
         isTablet,
         isDesktop,
-        sideBar,
-        setSideBar,
         isMobileMenuOpen,
         setMobileMenuOpen,
-        sideBar, setSideBar
+        isSidebarOpen,
+        setIsSidebarOpen,
+        handleSidebarClick,
+        sidebarRef
     }
     return (
         <>

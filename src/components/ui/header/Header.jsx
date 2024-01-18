@@ -1,5 +1,6 @@
 "use client";
 import classes from "./header.module.css";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import logo from "../../../assets/images/logo.webp";
 import open from "../../../assets/images/icon-menu.svg";
@@ -10,18 +11,22 @@ import Sidebar from "@/components/sideBar/SideBar";
 import { HeaderButton } from "@/utils/Button";
 import Icon from "@/utils/Hamburger";
 import { useUserContext } from "@/context/ContextApi";
-import Overlay from "@/components/modal/Modal";
-export default function Header() {
+
+
+export default function Header({ children }) {
   const {
-    toggleSideBar,
     toggleMobileMenu,
     isMobile,
     isTablet,
     isDesktop,
-    sideBar,
     isMobileMenuOpen,
-    setSideBar
+    isSidebarOpen, 
+    setIsSidebarOpen,
+    handleSidebarClick,
+    sidebarRef
   } = useUserContext();
+
+ 
   return (
     <>
       {(isMobile || isTablet || isDesktop) && (
@@ -51,23 +56,25 @@ export default function Header() {
                       Login
                     </button>
                   </Link>
-                  <Icon   onClick={() => setSideBar(true)}/>
+                  <Icon onClick={handleSidebarClick} />
                 </div>
               )}
             </nav>
-            {sideBar && isDesktop && (
-              <div
-                // className={`${sideBar ? classes.translate : ""} && ${
-                //   classes.sidebar
-                // }`}
-                // onClick={toggleSideBar}
-                className={`${classes.overlay} ${sideBar ? classes.open : ""}`}
-              >
-                {<Overlay sideBar={sideBar} setSideBar={setSideBar} toggleSideBar={toggleSideBar} />}
 
-                {/* <Sidebar toggleSideBar={toggleSideBar} SideBar={sideBar} /> */}
+            {isSidebarOpen && (
+              <div
+                ref={sidebarRef}
+                style={{
+                  transform: isSidebarOpen
+                    ? "translateX(0)"
+                    : "translateX(-100%)",
+                }}
+                className={classes.sidebar}
+              >
+                <Sidebar  handleSidebarClick={handleSidebarClick}/>
               </div>
             )}
+
             <div className={classes.mobileMenuBtn} onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? (
                 <Image className={classes.imgBtn} src={close} alt="null" />
