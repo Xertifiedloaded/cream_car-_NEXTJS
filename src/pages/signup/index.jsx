@@ -36,11 +36,13 @@ export default function SignUp() {
       if (response.ok) {
         const data = await response.json();
         const { token } = data; 
-
         localStorage.setItem("token", token);
-  
         console.log("User data sent successfully");
         console.log(token);
+        setPayLoad({
+          name: "",
+          password: "",
+        });
    
       } else {
         console.error("Error:", response.statusText);

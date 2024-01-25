@@ -31,6 +31,10 @@ export default function Login() {
         // const { token } = await response.json();
         console.log("login successfully");
         // localStorage.setItem('token', token);
+        setPayLoad({
+          name: "",
+          password: "",
+        });
       }
     } catch (error) {
       console.error("Error during authentication:", error);
