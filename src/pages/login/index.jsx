@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAuth } from "@/context/AuthContext";
 export default function Login() {
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -20,7 +19,19 @@ export default function Login() {
     });
   };
 
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    login(payLoad).then(() => {
+      setPayLoad({
+        email: "",
+        password: "",
+      });
+      router.push("/dashboard");
+    }).finally(() => {
+      setLoading(false);
+    });
+  };
   // const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
   // const [loading, setLoading] = useState(false);
   // const [payLoad, setPayLoad] = useState({
