@@ -3,50 +3,67 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAuth } from "@/context/AuthContext";
 export default function Login() {
-  const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const [payLoad, setPayLoad] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPayLoad((data) => {
       return { ...data, [name]: value };
     });
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payLoad),
-      });
-      if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem("token", token);
-        console.log("login successfully");
-        setPayLoad({
-          email: "",
-          password: "",
-        });
-        console.log(router);
-        router.push("/dashboard");
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error("Error during authentication:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
+
+  // const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
+  // const [loading, setLoading] = useState(false);
+  // const [payLoad, setPayLoad] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  // const router = useRouter();
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setPayLoad((data) => {
+  //     return { ...data, [name]: value };
+  //   });
+  // };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     setLoading(true);
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(payLoad),
+  //     });
+  //     if (response.ok) {
+  //       const { token } = await response.json();
+  //       localStorage.setItem("token", token);
+  //       console.log("login successfully");
+  //       setPayLoad({
+  //         email: "",
+  //         password: "",
+  //       });
+  //       console.log(router);
+  //       router.push("/dashboard");
+  //     } else {
+  //       console.error("Login failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during authentication:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <>
@@ -82,7 +99,7 @@ export default function Login() {
                 Forgotten Password? <Link href=""> Click Here</Link>
               </p>
               <div className={styles.btn}>
-                <button>
+                <button disabled={loading}>
                   {loading ? <div class={styles.loader}></div> : "Login"}
                 </button>
               </div>

@@ -6,6 +6,7 @@ import Footer from '@/components/ui/footer/Footer';
 import { useRouter } from 'next/router';
 import ContextApi from '@/context/ContextApi';
 import DataContext from '@/context/DataContext';
+import { AuthProvider } from '@/context/AuthContext';
 
 export default function App({ Component, pageProps }) {
     const router = useRouter()
@@ -41,16 +42,17 @@ export default function App({ Component, pageProps }) {
     return (
         <>
             <DataContext>
-                <ContextApi>
-
-                    <ShowHeader />
-                    <Layout>
-                        <div>
-                            <Component {...pageProps} />
-                        </div>
-                    </Layout>
-                    <ShowFooter />
-                </ContextApi>
+                <AuthProvider>
+                    <ContextApi>
+                        <ShowHeader />
+                        <Layout>
+                            <div>
+                                <Component {...pageProps} />
+                            </div>
+                        </Layout>
+                        <ShowFooter />
+                    </ContextApi>
+                </AuthProvider>
             </DataContext>
         </>
     )
