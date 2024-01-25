@@ -4,7 +4,7 @@ import styles from "./login.module.css";
 import Link from "next/link";
 export default function Login() {
   const [payLoad, setPayLoad] = useState({
-    name: "",
+    email: "",
     password: "",
   });
   const handleChange = (e) => {
@@ -26,9 +26,9 @@ export default function Login() {
       });
 
       if (response.ok) {
-        const { token } = await response.json();
+        // const { token } = await response.json();
         console.log("login successfully");
-        localStorage.setItem('token', token);
+        // localStorage.setItem('token', token);
 
       } else {
         setError('Authentication failed. Please check your credentials.');
@@ -52,12 +52,11 @@ export default function Login() {
           <form onSubmit={handleSubmit} className={styles.form} action="">
             <div className={styles.inputField}>
               <input
-                autoComplete={payLoad.name}
-                value={payLoad.name}
+                autoComplete={payLoad.email}
+                value={payLoad.email}
                 onChange={handleChange}
-                name="name"
-               
-                type="text"
+                name="email"
+                type="email"
                 placeholder="Enter your Name here"
               />
             </div>
@@ -67,7 +66,6 @@ export default function Login() {
                 onChange={handleChange}
                 value={payLoad.password}
                 name="password"
-          
                 type="password"
                 placeholder="Password"
               />
