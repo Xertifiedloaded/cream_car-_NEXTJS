@@ -17,29 +17,25 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch( "https://ola-gdx8.onrender.com/api/admin/v1/login", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payLoad),
-      });
-
+      const response = await fetch(
+        "https://ola-gdx8.onrender.com/api/admin/v1/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payLoad),
+        }
+      );
       if (response.ok) {
         // const { token } = await response.json();
         console.log("login successfully");
         // localStorage.setItem('token', token);
-
-      } else {
-        setError('Authentication failed. Please check your credentials.');
       }
     } catch (error) {
-      console.error('Error during authentication:', error);
+      console.error("Error during authentication:", error);
     }
   };
-
-
- 
 
   return (
     <>
