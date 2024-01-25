@@ -4,9 +4,6 @@ import styles from "./signup.module.css";
 import Link from "next/link";
 
 export default function SignUp() {
-  const [isFocused, setFocused] = useState(false);
-  const [focus, setFocus] = useState(false);
-  const [error, setError] = useState("");
   const [payLoad, setPayLoad] = useState({
     firstName: "",
     lastName: "",
@@ -24,7 +21,6 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(
         "https://ola-gdx8.onrender.com/api/admin/v1/signup",
@@ -36,17 +32,16 @@ export default function SignUp() {
           body: JSON.stringify(payLoad),
         }
       );
-
+      console.log("User data sent successfully");
       if (response.ok) {
         console.log("User data sent successfully");
-        setError("");
+    
         // Optionally, you can redirect the user or perform other actions upon successful signup.
       } else {
-        setError("Error signing up. Please try again.");
+ 
         console.error("Error:", response.statusText);
       }
     } catch (error) {
-      setError("An error occurred. Please try again later.");
       console.error("Error:", error);
     }
   };
@@ -58,7 +53,7 @@ export default function SignUp() {
             <h1>Cream</h1>
             <p>Welcome to CREAM!</p>
           </div>
-          <form onSubmit={handleSubmit} className={styles.form} action="">
+          <form onSubmit={handleSubmit} className={styles.form} action="/signup">
             <div className={styles.inputField}>
               <input
                 autoComplete={payLoad.firstName}
