@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 export default function Login() {
+  const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
   const [payLoad, setPayLoad] = useState({
     email: "",
     password: "",
@@ -18,22 +19,17 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://ola-gdx8.onrender.com/api/admin/v1/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payLoad),
-        }
-      );
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payLoad),
+      });
       if (response.ok) {
-        // const { token } = await response.json();
         console.log("login successfully");
-        // localStorage.setItem("token", token);
         setPayLoad({
-          name: "",
+          email: "",
           password: "",
         });
         const router = useRouter();
@@ -43,10 +39,6 @@ export default function Login() {
       console.error("Error during authentication:", error);
     }
   };
-  // const getTokenFromLocalStorage = () => {
-  //   return localStorage.getItem("token");
-  // };
-  // getTokenFromLocalStorage();
   return (
     <>
       <div className={styles.main}>

@@ -4,6 +4,7 @@ import styles from "./signup.module.css";
 import Link from "next/link";
 
 export default function SignUp() {
+  const url = "https://ola-gdx8.onrender.com/api/admin/v1/signup";
   const [payLoad, setPayLoad] = useState({
     firstName: "",
     lastName: "",
@@ -22,28 +23,26 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://ola-gdx8.onrender.com/api/admin/v1/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payLoad),
-        }
-      );
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payLoad),
+      });
       console.log("User data sent successfully");
       if (response.ok) {
         const data = await response.json();
-        const { token } = data; 
-        localStorage.setItem("token", token);
+
         console.log("User data sent successfully");
-        console.log(token);
+
         setPayLoad({
-          name: "",
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
           password: "",
         });
-   
       } else {
         console.error("Error:", response.statusText);
       }
