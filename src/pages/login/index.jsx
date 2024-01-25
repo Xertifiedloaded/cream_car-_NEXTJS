@@ -29,9 +29,9 @@ export default function Login() {
         }
       );
       if (response.ok) {
-        const { token } = await response.json();
+        // const { token } = await response.json();
         console.log("login successfully");
-        localStorage.setItem("token", token);
+        // localStorage.setItem("token", token);
         setPayLoad({
           name: "",
           password: "",
@@ -43,10 +43,10 @@ export default function Login() {
       console.error("Error during authentication:", error);
     }
   };
-  const getTokenFromLocalStorage = () => {
-    return localStorage.getItem("token");
-  };
-  getTokenFromLocalStorage();
+  // const getTokenFromLocalStorage = () => {
+  //   return localStorage.getItem("token");
+  // };
+  // getTokenFromLocalStorage();
   return (
     <>
       <div className={styles.main}>
