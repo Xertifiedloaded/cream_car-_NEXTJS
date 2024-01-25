@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAuth } from "@/context/AuthContext";
 export default function Login() {
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
