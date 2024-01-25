@@ -82,7 +82,9 @@ export default function Login() {
                 Forgotten Password? <Link href=""> Click Here</Link>
               </p>
               <div className={styles.btn}>
-                <button> {loading ? "Loading..." : "Login"}</button>
+                <button>
+                  {loading ? <div class={styles.loader}></div> : "Login"}
+                </button>
               </div>
               <div className={styles.signup}>
                 Don't have an account? <Link href="/signup"> Register</Link>

@@ -4,6 +4,7 @@ import styles from "./signup.module.css";
 import Link from "next/link";
 
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
   const url = "https://ola-gdx8.onrender.com/api/admin/v1/signup";
   const [payLoad, setPayLoad] = useState({
     firstName: "",
@@ -23,6 +24,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -49,6 +51,8 @@ export default function SignUp() {
     } catch (error) {
       console.log(`An error occurred: ${error.message}`);
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -117,7 +121,9 @@ export default function SignUp() {
             </div>
             <div className={styles.forget}>
               <div className={styles.btn}>
-                <button type="submit">SignUp</button>
+              <button>
+                  {loading ? <div class={styles.loader}></div> : "Submit"}
+                </button>
               </div>
               <div className={styles.signup}>
                 Already have an Account? <Link href="/login">Login</Link>
