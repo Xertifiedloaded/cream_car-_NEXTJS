@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 export default function Login() {
   const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
+  const [loading, setLoading] = useState(false);
   const [payLoad, setPayLoad] = useState({
     email: "",
     password: "",
@@ -19,6 +20,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -27,18 +29,22 @@ export default function Login() {
         body: JSON.stringify(payLoad),
       });
       if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem("token", token);
         console.log("login successfully");
         setPayLoad({
           email: "",
           password: "",
         });
-        console.log(router)
+        console.log(router);
         router.push("/dashboard");
       } else {
         console.error("Login failed");
       }
     } catch (error) {
       console.error("Error during authentication:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,7 +82,7 @@ export default function Login() {
                 Forgotten Password? <Link href=""> Click Here</Link>
               </p>
               <div className={styles.btn}>
-                <button>Login</button>
+                <button> {loading ? "Loading..." : "Login"}</button>
               </div>
               <div className={styles.signup}>
                 Don't have an account? <Link href="/signup"> Register</Link>
