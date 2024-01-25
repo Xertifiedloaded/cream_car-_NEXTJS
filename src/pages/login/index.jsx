@@ -9,6 +9,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const router = useRouter();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPayLoad((data) => {
@@ -17,7 +18,6 @@ export default function Login() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -32,13 +32,16 @@ export default function Login() {
           email: "",
           password: "",
         });
-        const router = useRouter();
+        console.log(router)
         router.push("/dashboard");
+      } else {
+        console.error("Login failed");
       }
     } catch (error) {
       console.error("Error during authentication:", error);
     }
   };
+
   return (
     <>
       <div className={styles.main}>
