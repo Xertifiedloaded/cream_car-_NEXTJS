@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import styles from "./signup.module.css";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function SignUp() {
+  const { signup } = useAuth();
   const [loading, setLoading] = useState(false);
-  const url = "https://ola-gdx8.onrender.com/api/admin/v1/signup";
+
   const [payLoad, setPayLoad] = useState({
     firstName: "",
     lastName: "",
@@ -21,40 +23,25 @@ export default function SignUp() {
     });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payLoad),
-      });
-      console.log("User data sent successfully");
-      if (response.ok) {
-        const data = await response.json();
-
-        console.log("User data sent successfully");
-
-        setPayLoad({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phoneNumber: "",
-          password: "",
-        });
-      } else {
-        console.error("Error:", response.statusText);
-      }
-    } catch (error) {
-      console.log(`An error occurred: ${error.message}`);
-      console.error("Error:", error);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    await signup(payLoad);
+    setPayLoad({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+    });
+    setLoading(false);
   };
+
+
+
+
+ 
   return (
     <>
       <div className={styles.main}>

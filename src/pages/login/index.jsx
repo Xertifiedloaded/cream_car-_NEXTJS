@@ -33,49 +33,6 @@ export default function Login() {
       setLoading(false);
     });
   };
-  // const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
-  // const [loading, setLoading] = useState(false);
-  // const [payLoad, setPayLoad] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const router = useRouter();
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setPayLoad((data) => {
-  //     return { ...data, [name]: value };
-  //   });
-  // };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     setLoading(true);
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(payLoad),
-  //     });
-  //     if (response.ok) {
-  //       const { token } = await response.json();
-  //       localStorage.setItem("token", token);
-  //       console.log("login successfully");
-  //       setPayLoad({
-  //         email: "",
-  //         password: "",
-  //       });
-  //       console.log(router);
-  //       router.push("/dashboard");
-  //     } else {
-  //       console.error("Login failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during authentication:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   return (
     <>
