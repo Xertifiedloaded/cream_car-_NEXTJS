@@ -17,9 +17,13 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem("token", token);
-        setUser({ token });
+        const data = await response.json();
+        if (data.status === "success") {
+          let token = data.data.admin.token
+          console.log(token)
+          localStorage.setItem('token',token)
+        }
+   
         console.log("login successfully");
       } else {
         console.error("Login failed");
@@ -42,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        // const data = await response.json();
+
         console.log("User data sent successfully");
 
       } else {

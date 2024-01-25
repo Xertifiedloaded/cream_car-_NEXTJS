@@ -23,9 +23,18 @@ export default function SignUp() {
     });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !payLoad.firstName ||
+      !payLoad.lastName ||
+      !payLoad.email ||
+      !payLoad.phoneNumber ||
+      !payLoad.password
+    ) {
+      console.error("Please fill in all the fields");
+      return;
+    }
     setLoading(true);
     await signup(payLoad);
     setPayLoad({
@@ -38,10 +47,6 @@ export default function SignUp() {
     setLoading(false);
   };
 
-
-
-
- 
   return (
     <>
       <div className={styles.main}>
@@ -108,7 +113,7 @@ export default function SignUp() {
             </div>
             <div className={styles.forget}>
               <div className={styles.btn}>
-              <button>
+                <button>
                   {loading ? <div class={styles.loader}></div> : "Submit"}
                 </button>
               </div>

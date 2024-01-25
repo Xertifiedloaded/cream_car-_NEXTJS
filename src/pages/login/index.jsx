@@ -22,6 +22,10 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!payLoad.email || !payLoad.password) {
+      console.error("Please fill in both email and password");
+      return;
+    }
     setLoading(true);
     login(payLoad).then(() => {
       setPayLoad({
