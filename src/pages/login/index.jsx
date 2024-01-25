@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 export default function Login() {
   const [payLoad, setPayLoad] = useState({
     email: "",
@@ -28,19 +29,24 @@ export default function Login() {
         }
       );
       if (response.ok) {
-        // const { token } = await response.json();
+        const { token } = await response.json();
         console.log("login successfully");
-        // localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
         setPayLoad({
           name: "",
           password: "",
         });
+        const router = useRouter();
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error("Error during authentication:", error);
     }
   };
-
+  const getTokenFromLocalStorage = () => {
+    return localStorage.getItem("token");
+  };
+  getTokenFromLocalStorage();
   return (
     <>
       <div className={styles.main}>
