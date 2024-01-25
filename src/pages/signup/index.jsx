@@ -3,50 +3,53 @@ import React, { useState } from "react";
 import styles from "./signup.module.css";
 import Link from "next/link";
 
-export default function Login() {
-  // const {name,setName}=useUserContext()
+export default function SignUp() {
   const [isFocused, setFocused] = useState(false);
   const [focus, setFocus] = useState(false);
   const [error, setError] = useState("");
   const [payLoad, setPayLoad] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPayLoad((data) => {
       return { ...data, [name]: value };
     });
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (payLoad.name === "olaitan" && payLoad.password === "password123") {
-      console.log(payLoad);
-      setError("");
-    } else if (payLoad.password.length < 6) {
-      setError("Password must be at least 6 characters long.");
-      console.log(error);
-    } else {
-      setError("Incorrect email or password. Please try again.");
-      console.log(error);
+
+    try {
+      const response = await fetch(
+        "https://ola-gdx8.onrender.com/api/admin/v1/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payLoad),
+        }
+      );
+
+      if (response.ok) {
+        console.log("User data sent successfully");
+        setError("");
+        // Optionally, you can redirect the user or perform other actions upon successful signup.
+      } else {
+        setError("Error signing up. Please try again.");
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later.");
+      console.error("Error:", error);
     }
   };
-
-  const handleFocus = () => {
-    setFocused(!isFocused);
-  };
-  const handleBlur = () => {
-    setFocused(false);
-  };
-
-  // focused
-  const toggleFocus = () => {
-    setFocus(!focus);
-  };
-  const toggleBlur = () => {
-    setFocus(false);
-  };
-
   return (
     <>
       <div className={styles.main}>
@@ -58,52 +61,40 @@ export default function Login() {
           <form onSubmit={handleSubmit} className={styles.form} action="">
             <div className={styles.inputField}>
               <input
-                autoComplete={payLoad.name}
-                value={payLoad.name}
+                autoComplete={payLoad.firstName}
+                value={payLoad.firstName}
                 onChange={handleChange}
                 name="firstName"
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                style={{ borderColor: isFocused ? "#fcba03" : "black" }}
                 type="text"
-                placeholder="Your Firs Name e.g Olaitan"
+                placeholder="Your First Name e.g Olaitan"
               />
             </div>
             <div className={styles.inputField}>
               <input
-                autoComplete={payLoad.password}
+                autoComplete={payLoad.lastName}
                 onChange={handleChange}
-                value={payLoad.password}
+                value={payLoad.lastName}
                 name="lastName"
-                onFocus={toggleFocus}
-                onBlur={toggleBlur}
-                style={{ borderColor: focus ? "#fcba03" : "black" }}
                 type="text"
                 placeholder="Your Last Name e.g Olaitan"
               />
             </div>
             <div className={styles.inputField}>
               <input
-                autoComplete={payLoad.password}
+                autoComplete={payLoad.email}
                 onChange={handleChange}
-                value={payLoad.password}
-                name="password"
-                onFocus={toggleFocus}
-                onBlur={toggleBlur}
-                style={{ borderColor: focus ? "#fcba03" : "black" }}
+                value={payLoad.email}
+                name="email"
                 type="email"
                 placeholder="Your Email e.g makindeolaitan01@gmail.com"
               />
             </div>
             <div className={styles.inputField}>
               <input
-                autoComplete={payLoad.password}
+                autoComplete={payLoad.phoneNumber}
                 onChange={handleChange}
-                value={payLoad.password}
-                name="password"
-                onFocus={toggleFocus}
-                onBlur={toggleBlur}
-                style={{ borderColor: focus ? "#fcba03" : "black" }}
+                value={payLoad.phoneNumber}
+                name="phoneNumber"
                 type="text"
                 placeholder="Phone Number e.g 08050726434"
               />
@@ -114,19 +105,16 @@ export default function Login() {
                 onChange={handleChange}
                 value={payLoad.password}
                 name="password"
-                onFocus={toggleFocus}
-                onBlur={toggleBlur}
-                style={{ borderColor: focus ? "#fcba03" : "black" }}
                 type="password"
                 placeholder="Password"
               />
             </div>
             <div className={styles.forget}>
               <div className={styles.btn}>
-                <button>SignUp</button>
+                <button type="submit">SignUp</button>
               </div>
               <div className={styles.signup}>
-               Already have an Account? <Link href="signup">Login</Link>
+                Already have an Account? <Link href="/login">Login</Link>
               </div>
             </div>
           </form>
