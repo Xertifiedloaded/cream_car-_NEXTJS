@@ -34,14 +34,19 @@ export default function SignUp() {
       );
       console.log("User data sent successfully");
       if (response.ok) {
+        const data = await response.json();
+        const { token } = data; 
+
+        localStorage.setItem("token", token);
+  
         console.log("User data sent successfully");
-    
-        // Optionally, you can redirect the user or perform other actions upon successful signup.
+        console.log(token);
+   
       } else {
- 
         console.error("Error:", response.statusText);
       }
     } catch (error) {
+      console.log(`An error occurred: ${error.message}`);
       console.error("Error:", error);
     }
   };
@@ -53,7 +58,12 @@ export default function SignUp() {
             <h1>Cream</h1>
             <p>Welcome to CREAM!</p>
           </div>
-          <form onSubmit={handleSubmit} className={styles.form} action="/signup">
+          <form
+            onSubmit={handleSubmit}
+            method="post"
+            className={styles.form}
+            action="/signup"
+          >
             <div className={styles.inputField}>
               <input
                 autoComplete={payLoad.firstName}

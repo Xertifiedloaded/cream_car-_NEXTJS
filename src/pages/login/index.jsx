@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 export default function Login() {
-  const [isFocused, setFocused] = useState(false);
-  const [focus, setFocus] = useState(false);
-  const [error, setError] = useState("");
   const [payLoad, setPayLoad] = useState({
     name: "",
     password: "",
@@ -16,34 +13,33 @@ export default function Login() {
       return { ...data, [name]: value };
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (payLoad.name === "olaitan" && payLoad.password === "password123") {
-      console.log(payLoad);
-      setError("");
-    } else if (payLoad.password.length < 6) {
-      setError("Password must be at least 6 characters long.");
-      console.log(error);
-    } else {
-      setError("Incorrect email or password. Please try again.");
-      console.log(error);
+
+    try {
+      const response = await fetch( "https://ola-gdx8.onrender.com/api/admin/v1/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payLoad),
+      });
+
+      if (response.ok) {
+        const { token } = await response.json();
+        console.log("login successfully");
+        localStorage.setItem('token', token);
+
+      } else {
+        setError('Authentication failed. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('Error during authentication:', error);
     }
   };
 
-  const handleFocus = () => {
-    setFocused(!isFocused);
-  };
-  const handleBlur = () => {
-    setFocused(false);
-  };
 
-  // focused
-  const toggleFocus = () => {
-    setFocus(!focus);
-  };
-  const toggleBlur = () => {
-    setFocus(false);
-  };
+ 
 
   return (
     <>
@@ -60,9 +56,7 @@ export default function Login() {
                 value={payLoad.name}
                 onChange={handleChange}
                 name="name"
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                style={{ borderColor: isFocused ? "#fcba03" : "black" }}
+               
                 type="text"
                 placeholder="Enter your Name here"
               />
@@ -73,9 +67,7 @@ export default function Login() {
                 onChange={handleChange}
                 value={payLoad.password}
                 name="password"
-                onFocus={toggleFocus}
-                onBlur={toggleBlur}
-                style={{ borderColor: focus ? "#fcba03" : "black" }}
+          
                 type="password"
                 placeholder="Password"
               />
