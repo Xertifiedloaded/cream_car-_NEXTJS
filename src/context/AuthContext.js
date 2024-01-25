@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+ const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
   const login = async (payLoad) => {
     try {
       const response = await fetch(url, {
