@@ -11,7 +11,7 @@ import Sidebar from "@/components/sideBar/SideBar";
 import { HeaderButton } from "@/utils/Button";
 import Icon from "@/utils/Hamburger";
 import { useUserContext } from "@/context/ContextApi";
-
+import { useAuth } from "@/context/AuthContext";
 
 export default function Header({ children }) {
   const {
@@ -20,13 +20,12 @@ export default function Header({ children }) {
     isTablet,
     isDesktop,
     isMobileMenuOpen,
-    isSidebarOpen, 
-    setIsSidebarOpen,
+    isSidebarOpen,
     handleSidebarClick,
-    sidebarRef
+    sidebarRef,
   } = useUserContext();
 
- 
+  const { logout, user,isLoggedIn } = useAuth();
   return (
     <>
       {(isMobile || isTablet || isDesktop) && (
@@ -51,11 +50,19 @@ export default function Header({ children }) {
               </ul>
               {isDesktop && (
                 <div className={classes.navBtn}>
-                  <Link href="/login">
-                    <button style={HeaderButton} className={classes.btn}>
-                      Login
-                    </button>
-                  </Link>
+                  {isLoggedIn ? (
+                    <Link href="/login">
+                      <button onClick={logout} style={HeaderButton} className={classes.btn}>
+                        Logout
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link href="/login">
+                      <button style={HeaderButton} className={classes.btn}>
+                        Login
+                      </button>
+                    </Link>
+                  )}
                   <Icon onClick={handleSidebarClick} />
                 </div>
               )}
@@ -71,7 +78,7 @@ export default function Header({ children }) {
                 }}
                 className={classes.sidebar}
               >
-                <Sidebar  handleSidebarClick={handleSidebarClick}/>
+                <Sidebar handleSidebarClick={handleSidebarClick} />
               </div>
             )}
 
