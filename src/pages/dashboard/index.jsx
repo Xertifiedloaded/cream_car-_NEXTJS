@@ -1,12 +1,23 @@
 "use client";
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "@/context/AuthContext";
 
 export default function Dashboard() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      
+      setIsAuthenticated(true);
+    } else {
+      router.replace("/login");
+    }
+  }, [router]);
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <>

@@ -7,8 +7,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
   const login = async (payLoad) => {
+  
     try {
-      const response = await fetch(url, {
+      const response = await fetch("https://ola-gdx8.onrender.com/api/admin/v1/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,18 +20,30 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === "success") {
-          let token = data.data.admin.token
-          console.log(token)
-          localStorage.setItem('token',token)
+          const token = data.data.admin.token;
+          console.log("Retrieved Token:", token);
+          localStorage.setItem('token', token);
+          const accountsResponse = await fetch("https://ola-gdx8.onrender.com/api/admin/v1/accounts", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+          });
+
+          console.log("Accounts Response:", await accountsResponse.json());
+
+          console.log("login and subsequent request successful");
+        } else {
+          console.error("Login failed");
         }
-   
-        console.log("login successfully");
       } else {
         console.error("Login failed");
       }
     } catch (error) {
       console.error("Error during authentication:", error);
     }
+
   };
 
 
