@@ -4,7 +4,9 @@ import { useRouter } from "next/router";
 import styles from "../../components/styles/dashboard.module.css";
 import { textAccordions } from "@/utils/accordions";
 import axios from "axios";
+
 export default function Dashboard() {
+  const url = "https://ola-gdx8.onrender.com/api/admin/v1/post";
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
   const [openIndex, setOpenIndex] = useState(null);
@@ -12,7 +14,7 @@ export default function Dashboard() {
     image: null,
     title: "",
     paragraph: "",
-    headline:""
+    headline: "",
   });
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -52,25 +54,26 @@ export default function Dashboard() {
       formDataToSend.append("content", formData.content);
       formDataToSend.append("paragraph", formData.paragraph);
       formDataToSend.append("headline", formData.headline);
-
-      await axios.post("http://localhost:4500/api/admin/v1/post", formDataToSend, {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(url, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
+
+      console.log("Post submitted successfully:", response.data);
 
       setFormData({
         image: null,
         content: "",
         paragraph: "",
-        headline:""
+        headline: "",
       });
-  
     } catch (error) {
       console.error("Error submitting post:", error);
     }
   };
-
   return (
     <>
       <section className={styles.section}>
@@ -121,17 +124,15 @@ export default function Dashboard() {
                     value={formData.content}
                     onChange={handleChange}
                   />
-                
                 </div>
                 <div className={styles.inputs}>
-                <input
+                  <input
                     type="text"
                     placeholder="headline"
                     name="headline"
                     value={formData.headline}
                     onChange={handleChange}
                   />
-                
                 </div>
                 <textarea
                   className={styles.textArea}
