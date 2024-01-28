@@ -1,13 +1,14 @@
-import React from 'react'
-import Postlayout from '../../../layouts/postlayout'
-import RequestPage from '@/components/request/Request'
+import React from "react";
+import Postlayout from "../../../layouts/postlayout";
+import RequestPage from "@/components/request/Request";
+import Car from "@/components/car/Car";
 
 export default function AutoMobile() {
   return (
-  <>
-  <RequestPage/>
-  </>
-
-  )
+    <>
+      <RequestPage />
+      <Car />
+    </>
+  );
 }
-AutoMobile.Layout=Postlayout
+AutoMobile.Layout = Postlayout;

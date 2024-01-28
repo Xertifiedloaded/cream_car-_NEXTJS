@@ -30,6 +30,7 @@ export const FooterItems = [
     contact: "Facebook",
     blog: "Twitter",
     terms: "LinkedIn",
+    youtube:"Youtube"
   },
 ];
 

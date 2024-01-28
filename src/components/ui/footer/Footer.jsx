@@ -19,6 +19,7 @@ export default function Footer() {
                   <li>{footer.contact}</li>
                   <li>{footer.blog}</li>
                   <li>{footer.terms}</li>
+                  <li>{footer.youtube}</li>
                 </ul>
               </>
             )

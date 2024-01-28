@@ -1,0 +1,88 @@
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section {
+    width: 97%;
+    margin: 0 auto;
+}
+
+.heading>button {
+    width: 250px;
+    height: 50px;
+    background: purple;
+    border: none;
+    color: white;
+}
+
+.details {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.details>img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid black;
+}
+
+.main {
+    display: flex;
+    margin-top: 20px;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.main .widget {
+    width: 20%;
+    height: 90vh;
+    border-radius: 10px;
+    background: honeydew;
+}
+
+.textBody {
+    width: 70%;
+}
+
+.list>ul {
+    margin-top: 20px;
+}
+
+.box {
+    margin: 10px 0;
+}
+.form>button{
+    width: 100%;
+    height: 40px;
+    background: black;
+    color: white;
+}
+.accordions {
+    padding-left: 20px;
+}
+
+.accordions>li {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+
+.inputs,.para{
+    margin: 10px 0;
+    width: 100%;
+    height: 40px;
+}
+.inputs>input,.para>input{
+    width: 100%;
+    height: 100%;
+}
+.textArea {
+    width: 100%;
+    height: 400px;
+    resize: none;
+}
+
