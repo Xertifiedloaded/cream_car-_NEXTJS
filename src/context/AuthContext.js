@@ -1,11 +1,13 @@
 'use client'
 import React, { createContext, useContext, useEffect, useState } from "react";
-
+import { useRouter } from 'next/router';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState(null);
   const url = "https://ola-gdx8.onrender.com/api/admin/v1/login";
   const urlAccount = "https://ola-gdx8.onrender.com/api/admin/v1/accounts"
   const login = async (payLoad) => {
@@ -43,10 +45,14 @@ export const AuthProvider = ({ children }) => {
           console.error("Login failed");
         }
       } else {
-        console.error("Login failed");
+        const errorData = await response.json();
+        const errorMessage = errorData.message || "An error occurred";
+        console.error("Error:", errorMessage);
+        setError(errorMessage);
       }
     } catch (error) {
       console.error("Error during authentication:", error);
+      setError(error.message);
     }
 
   };
@@ -55,6 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (payLoad) => {
     const url = "https://ola-gdx8.onrender.com/api/admin/v1/signup";
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -65,10 +72,15 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.ok) {
-
+        setLoggedIn(true);
+        router.push('/login');
         console.log("User data sent successfully");
 
       } else {
+        const errorData = await response.json();
+        const errorMessage = errorData.message || "An error occurred";
+        console.error("Error:", errorMessage);
+        setError(errorMessage);
         console.error("Error:", response.statusText);
       }
     } catch (error) {
@@ -82,9 +94,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       setLoggedIn(true);
     }
-  }, []);
-
-
+  }, [isLoggedIn]);
   // log out
   const logout = () => {
     localStorage.removeItem("token");
@@ -102,7 +112,9 @@ export const AuthProvider = ({ children }) => {
     logout,
     signup,
     isLoggedIn,
-    setLoggedIn
+    setLoggedIn,
+    error,
+    setError
   }
   return (
     <AuthContext.Provider value={value}>

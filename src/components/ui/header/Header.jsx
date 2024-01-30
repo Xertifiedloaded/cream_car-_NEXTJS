@@ -1,3 +1,9 @@
+
+
+
+
+
+
 "use client";
 import classes from "./header.module.css";
 import React, { useState, useEffect, useRef } from "react";
@@ -25,7 +31,8 @@ export default function Header({ children }) {
     sidebarRef,
   } = useUserContext();
 
-  const { logout, user,isLoggedIn } = useAuth();
+  const { logout, user, isLoggedIn } = useAuth();
+
   return (
     <>
       {(isMobile || isTablet || isDesktop) && (
@@ -48,24 +55,32 @@ export default function Header({ children }) {
                   </li>
                 ))}
               </ul>
-              {isDesktop && (
-                <div className={classes.navBtn}>
-                  {isLoggedIn ? (
-                    <Link href="/login">
-                      <button onClick={logout} style={HeaderButton} className={classes.btn}>
-                        Logout
-                      </button>
-                    </Link>
-                  ) : (
-                    <Link href="/login">
-                      <button style={HeaderButton} className={classes.btn}>
-                        Login
-                      </button>
-                    </Link>
-                  )}
+              <div className={classes.navBtn}>
+                {isDesktop && isLoggedIn && (
+                  <Link href="/login">
+                    <button onClick={logout} style={HeaderButton} className={classes.btn}>
+                      Logout
+                    </button>
+                  </Link>
+                )}
+                {isDesktop && !isLoggedIn && (
+                  <Link href="/login">
+                    <button style={HeaderButton} className={classes.btn}>
+                      Login
+                    </button>
+                  </Link>
+                )}
+                {isMobile && (
+                  <Link href="/signup">
+                    <button style={HeaderButton} className={classes.btn}>
+                      Signup
+                    </button>
+                  </Link>
+                )}
+                {isDesktop && (
                   <Icon onClick={handleSidebarClick} />
-                </div>
-              )}
+                )}
+              </div>
             </nav>
 
             {isSidebarOpen && (
