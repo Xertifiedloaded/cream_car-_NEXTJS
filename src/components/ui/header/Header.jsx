@@ -1,9 +1,4 @@
 
-
-
-
-
-
 "use client";
 import classes from "./header.module.css";
 import React, { useState, useEffect, useRef } from "react";

@@ -1,19 +1,20 @@
 import { categories } from "@/utils/Nav";
 import styles from "./category.module.css";
-import { useUserContext } from "@/context/ContextApi";
+
 import SkeletonLoader from "../lazy-load/Loader";
 import Image from "next/image";
 import { Card } from "@/utils/Button";
+import { UserUseData } from "@/context/DataContext";
 export default function Category() {
-  const { loading } = useUserContext();
+  const { data, loading } = UserUseData();
   return (
     <>
       <section className={styles.main}>
         <div style={{ width: "100%" }}>
           <h1>Category</h1>
           <div className={styles.container}>
-            {categories.map((category, index) => (
-              <CarCategory key={index} loading={loading} {...category} />
+            {data.map((category, index) => (
+              <CarCategory loading={loading} {...category} />
             ))}
           </div>
         </div>
@@ -21,22 +22,25 @@ export default function Category() {
     </>
   );
 }
-const CarCategory = ({ key, image, content, loading, coming }) => {
+const CarCategory = ({ paragraph,data,loading, picture, content }) => {
   return (
     <>
-      <div
-          key={key}
-          className={styles.card}
-        >
-          <Image  
-          layout="fill"
-          alt="category img"
-          objectFit="cover" src={image} />
+      
+        <div className={styles.card}>
+          (
+          <Image
+            layout="fill"
+            alt="category img"
+            objectFit="cover"
+            src={picture}
+          />
+          )
           <div className={styles.content}>
             <h2>{content}</h2>
-            <p>{coming}</p>
+            <p>{paragraph}</p>
           </div>
         </div>
+      
     </>
   );
 };
