@@ -29,3 +29,24 @@
     width: 100%;
   }
 }
+
+
+/* .skeletonLoader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeletonHeader {
+  height: 20px;
+  width: 50%;
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.skeletonContent {
+  height: 15px;
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 4px;
+} */
